@@ -1,0 +1,84 @@
+---
+const base = import.meta.env.BASE_URL;
+const items = [
+  ['Sobre mí', 'sobre-mi'],
+  ['Experiencia', 'experiencia'],
+  ['Formación', 'formacion'],
+  ['Habilidades', 'habilidades'],
+  ['Proyectos', 'proyectos'],
+  ['Contacto', 'contacto']
+];
+---
+
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href={`${base}#inicio`} aria-label="Ir al inicio">JAEH</a>
+
+    <button class="icon-button menu-toggle" type="button" aria-expanded="false" aria-controls="site-navigation" data-menu-toggle>
+      <span class="sr-only">Abrir menú de navegación</span>
+      <svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+        <path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+    </button>
+
+    <nav id="site-navigation" class="site-nav" aria-label="Navegación principal" data-nav>
+      {items.map(([label, id]) => <a href={`${base}#${id}`}>{label}</a>)}
+    </nav>
+
+    <button class="icon-button theme-toggle" type="button" data-theme-toggle aria-label="Cambiar a modo oscuro">
+      <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+        <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2" />
+        <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      </svg>
+      <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20">
+        <path d="M20 15.2A8 8 0 0 1 8.8 4 8.5 8.5 0 1 0 20 15.2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<script is:inline>
+  (() => {
+    const menuButton = document.querySelector('[data-menu-toggle]');
+    const nav = document.querySelector('[data-nav]');
+    const themeButton = document.querySelector('[data-theme-toggle]');
+
+    if (menuButton && nav) {
+      const closeMenu = () => {
+        menuButton.setAttribute('aria-expanded', 'false');
+        nav.removeAttribute('data-open');
+        const label = menuButton.querySelector('.sr-only');
+        if (label) label.textContent = 'Abrir menú de navegación';
+      };
+
+      menuButton.addEventListener('click', () => {
+        const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', String(!expanded));
+        nav.toggleAttribute('data-open', !expanded);
+        const label = menuButton.querySelector('.sr-only');
+        if (label) label.textContent = expanded ? 'Abrir menú de navegación' : 'Cerrar menú de navegación';
+      });
+
+      nav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeMenu();
+      });
+    }
+
+    if (themeButton) {
+      const setLabel = () => {
+        const current = document.documentElement.dataset.theme;
+        themeButton.setAttribute('aria-label', current === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro');
+      };
+
+      setLabel();
+      themeButton.addEventListener('click', () => {
+        const current = document.documentElement.dataset.theme;
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('theme', next);
+        setLabel();
+      });
+    }
+  })();
+</script>

@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Página no encontrada | José Alejandro Estudillo Herrera" description="La página solicitada no existe." noindex={true}>
+  <section class="section error-page">
+    <div class="container narrow">
+      <p class="eyebrow">Error 404</p>
+      <h1>Página no encontrada</h1>
+      <p>La dirección puede haber cambiado o no existir.</p>
+      <a class="button button-primary" href={base}>Volver al portafolio</a>
+    </div>
+  </section>
+</BaseLayout>

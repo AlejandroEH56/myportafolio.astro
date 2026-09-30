@@ -1,0 +1,16 @@
+---
+import type { SkillGroup } from '../data/portfolio';
+interface Props { groups: readonly SkillGroup[] }
+const { groups } = Astro.props;
+---
+
+<div class="skills-grid">
+  {groups.map((group) => (
+    <article class="skill-group">
+      <h3>{group.title}</h3>
+      <ul class="tag-list">
+        {group.items.map((item) => <li>{item}</li>)}
+      </ul>
+    </article>
+  ))}
+</div>

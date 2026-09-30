@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Skills from '../components/Skills.astro';
+import ContactLinks from '../components/ContactLinks.astro';
+import { portfolio } from '../data/portfolio';
+
+const title = `${portfolio.person.name} | Portafolio profesional`;
+const description = 'Portafolio profesional de José Alejandro Estudillo Herrera: desarrollo Full Stack, PHP, CodeIgniter, seguridad OAuth2, APIs empresariales y soluciones web institucionales.';
+---
+
+<BaseLayout {title} {description}>
+  <Hero />
+
+  <Section
+    id="sobre-mi"
+    eyebrow="Perfil"
+    title="Sobre mí"
+    intro="Desarrollo soluciones web con enfoque en procesos institucionales, seguridad, integración de servicios y mantenibilidad."
+  >
+    <div class="about-grid">
+      <p>{portfolio.person.summary}</p>
+      <div class="about-points">
+        <div>
+          <strong>Enfoque</strong>
+          <span>Desarrollo web y transformación digital</span>
+        </div>
+        <div>
+          <strong>Arquitectura</strong>
+          <span>MVC, APIs RESTful e integración de identidad</span>
+        </div>
+        <div>
+          <strong>Entrega</strong>
+          <span>Del análisis de requisitos a producción</span>
+        </div>
+      </div>
+    </div>
+  </Section>
+
+  <Section id="experiencia" eyebrow="Trayectoria" title="Experiencia profesional">
+    <div class="stack">
+      {portfolio.experience.map((experience) => <ExperienceCard {experience} />)}
+    </div>
+  </Section>
+
+  <Section id="formacion" eyebrow="Educación" title="Formación académica">
+    <div class="card education-card">
+      {portfolio.education.map((item) => (
+        <article>
+          <p class="card-kicker">{item.graduation}</p>
+          <h3>{item.degree}</h3>
+          <p class="card-subtitle">{item.institution}</p>
+          <p>{item.note}</p>
+        </article>
+      ))}
+    </div>
+  </Section>
+
+  <Section
+    id="habilidades"
+    eyebrow="Stack"
+    title="Habilidades y tecnologías"
+    intro="Tecnologías y prácticas mencionadas explícitamente en el CV proporcionado."
+  >
+    <Skills groups={portfolio.skills} />
+    <div class="language-card card">
+      <h3>Idiomas</h3>
+      {portfolio.languages.map((item) => (
+        <p><strong>{item.language} — {item.level}.</strong> {item.detail}</p>
+      ))}
+    </div>
+  </Section>
+
+  <Section
+    id="proyectos"
+    eyebrow="Trabajo destacado"
+    title="Proyectos"
+    intro="El CV documenta un proyecto institucional. No se agregaron proyectos adicionales sin evidencia."
+  >
+    <div class="projects-grid">
+      {portfolio.projects.map((project) => <ProjectCard {project} />)}
+    </div>
+  </Section>
+
+  <Section
+    id="contacto"
+    eyebrow="Contacto"
+    title="Conversemos"
+    intro="Puedes consultar mi actividad profesional o iniciar contacto mediante los siguientes canales."
+  >
+    <ContactLinks />
+  </Section>
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import { portfolio } from '../data/portfolio';
+---
+
+<div class="contact-grid">
+  <a class="contact-card" href={portfolio.links.github} target="_blank" rel="noopener noreferrer">
+    <span class="contact-icon" aria-hidden="true">GH</span>
+    <span>
+      <strong>GitHub</strong>
+      <small>Repositorios y actividad de desarrollo</small>
+    </span>
+    <span aria-hidden="true">↗</span>
+  </a>
+
+  <a class="contact-card" href={portfolio.links.linkedin} target="_blank" rel="noopener noreferrer">
+    <span class="contact-icon" aria-hidden="true">in</span>
+    <span>
+      <strong>LinkedIn</strong>
+      <small>Perfil y trayectoria profesional</small>
+    </span>
+    <span aria-hidden="true">↗</span>
+  </a>
+
+  <button class="contact-card contact-button" type="button" data-email={portfolio.links.emailEncoded}>
+    <span class="contact-icon" aria-hidden="true">@</span>
+    <span>
+      <strong>Correo</strong>
+      <small>Abrir la aplicación de correo configurada</small>
+    </span>
+    <span aria-hidden="true">→</span>
+  </button>
+</div>
+
+<p class="privacy-note">El correo se reconstruye únicamente al activar el botón para evitar exponerlo directamente como texto en la página. Un enlace <code>mailto:</code> no impide por completo el scraping automatizado.</p>
+
+<script is:inline>
+  document.querySelectorAll('[data-email]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const encoded = button.getAttribute('data-email');
+      if (!encoded) return;
+      try {
+        const address = atob(encoded);
+        window.location.href = `mailto:${address}`;
+      } catch {
+        button.setAttribute('aria-label', 'No fue posible abrir el correo');
+      }
+    });
+  });
+</script>
