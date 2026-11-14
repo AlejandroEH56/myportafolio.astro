@@ -1,6 +1,6 @@
 # Portafolio profesional — José Alejandro Estudillo Herrera
 
-Portafolio estático construido con Astro para presentar experiencia, formación, habilidades y proyectos de forma rápida, accesible y mantenible. El contenido inicial proviene exclusivamente del CV proporcionado y evita publicar datos personales innecesarios.
+Portafolio estático construido con Astro para presentar experiencia, formación, habilidades y proyectos de forma rápida, accesible y mantenible. La página de inicio reúne el contenido del CV V1.11.01 y los proyectos destacados.
 
 ## Tecnologías
 
@@ -68,26 +68,20 @@ Ahí puedes agregar o modificar experiencia, formación, habilidades, proyectos,
 
 Para esta primera versión se eligió TypeScript en lugar de Content Collections porque el sitio tiene una sola página y un volumen pequeño de contenido estructurado. Esto aporta tipado y mantenimiento sencillo sin introducir archivos o capas innecesarias. Si el portafolio crece a muchos proyectos o artículos, Content Collections será una evolución natural.
 
-## Privacidad
+Edita el perfil, la experiencia, las habilidades, la formación, los idiomas, los proyectos y los enlaces en `src/data/portfolio.ts`. La página `src/pages/index.astro` pasa esos datos a los componentes.
 
-El sitio inicial:
+## Contacto en la versión web
 
-- No publica el teléfono incluido en el CV.
-- Generaliza la ubicación a `Ciudad de México, México`.
-- No muestra el correo electrónico como texto plano. Se almacena codificado y se reconstruye al pulsar el botón de correo.
-- No incluye el PDF del CV en `public/` ni ofrece descarga hasta confirmar que existe una versión apta para hacerse pública.
-
-La codificación del correo solo reduce el scraping básico. Un enlace `mailto:` sigue pudiendo ser detectado por automatizaciones avanzadas cuando el usuario lo activa o al inspeccionar el código del sitio.
+El portafolio muestra Cuauhtémoc, CDMX, enlaces a LinkedIn y GitHub y un botón de correo. El teléfono figura en el documento de origen.
 
 ## Datos pendientes
 
-No se inventaron elementos no presentes en el CV. Quedan como posibles ampliaciones:
-
-- `[PENDIENTE: agregar logros cuantificables verificables.]`
-- `[PENDIENTE: agregar enlaces públicos o repositorios de proyectos, si existen.]`
-- `[PENDIENTE: agregar certificaciones o cursos cuando exista información verificable.]`
-- `[PENDIENTE: confirmar si una versión pública del CV puede ofrecerse para descarga.]`
-- `[PENDIENTE: agregar fotografía profesional o identidad visual propia, si se desea.]`
+- **Telemática LEFIC**. El contrato indica como fecha de término el 31 de diciembre de 2026. Después de esa fecha, confirmar si concluyó o se renovó y actualizar «Actualidad» según corresponda.
+- **Titulación**. El CV V1.11.01 indica «Título pendiente de entrega». La versión anterior del sitio decía «Titulado». Confirmar el estado actual.
+- **GitHub**. El CV enlaza a `JAEH056` y el remoto del portafolio usa `AlejandroEH56`. Confirmar cuál debe mostrarse como perfil principal. La página usa el enlace del CV.
+- **Proyecto del ITSH**. El CV V1.11.01 registra agosto de 2024 a febrero de 2026 y el cargo de Desarrollador Full Stack. Otras variantes del CV registran distintos meses de inicio o fin, y el portafolio incluye el rol de líder técnico. Confirmar si las diferencias corresponden a etapas o responsabilidades que deban explicarse.
+- **Resultados de LEFIC**. Si hay cifras verificables y autorizadas para publicación, agregar el alcance de los reportes o del sistema de inventarios, por ejemplo los grupos atendidos o el volumen de registros.
+- **Enlaces de proyectos y CV descargable**. Confirmar si hay una demo o repositorio público del ITSH y si existe un PDF apto para ofrecerse en el sitio.
 
 ## Configuración de GitHub Pages
 

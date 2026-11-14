@@ -2,6 +2,7 @@ export type Experience = {
   role: string;
   organization: string;
   project: string;
+  projectType?: string;
   period: string;
   summary: string;
   highlights: readonly string[];
@@ -23,18 +24,74 @@ export type Project = {
   linkLabel?: string;
 };
 
+const technicalSkills = [
+  { title: 'Backend', items: ['PHP 8.3', 'Laravel 12', 'CodeIgniter 4', 'APIs REST'] },
+  { title: 'Frontend', items: ['HTML5', 'CSS3', 'JavaScript', 'jQuery', 'Bootstrap 5'] },
+  { title: 'Datos e infraestructura', items: ['MySQL', 'SQL Server', 'Git', 'GitHub', 'LAMP'] },
+  { title: 'Identidad y pruebas', items: ['Microsoft Entra ID', 'Microsoft Graph', 'OAuth 2.0', 'PHPUnit'] }
+] as const satisfies readonly SkillGroup[];
+
+const lefic = {
+  role: 'Desarrollador Junior',
+  organization: 'Telemática LEFIC',
+  project: 'Módulo de reportes y sistema de inventarios',
+  period: 'Julio de 2026 – Actualidad',
+  summary: 'Desarrollo de funcionalidades para el seguimiento de la carga de imágenes y la gestión de bienes.',
+  highlights: [
+    'Desarrollé en PHP 8.3 nativo un módulo de reportes con consultas para medir el avance de la carga de imágenes a nivel general, por grupo y por usuario. Incorporé gráficas y exportación de resultados.',
+    'Amplié un sistema de inventarios en Laravel 12 con edición de registros y un flujo de baja de bienes que incluyó análisis de requisitos, baja lógica en base de datos y carga masiva de evidencias.',
+    'Mejoré los formularios de inventario con ayudas por campo, validación durante la captura y mensajes de error para facilitar la corrección de datos.',
+    'Elaboré documentación técnica de los módulos desarrollados y las mejoras implementadas.'
+  ],
+  technologies: ['PHP 8.3', 'Laravel 12', 'SQL']
+} as const satisfies Experience;
+
+const itsh = {
+  role: 'Desarrollador Full Stack & Líder Técnico',
+  organization: 'Instituto Tecnológico Superior de Huatusco (ITSH)',
+  project: 'Sistema de Control de Residencias Profesionales',
+  projectType: 'Proyecto institucional',
+  period: 'Agosto de 2024 – Febrero de 2026',
+  summary:
+    'Proyecto institucional enfocado en migrar el proceso de residencia profesional desde formatos físicos hacia un flujo digital validado.',
+  highlights: [
+    'Modelé casos de uso para digitalizar el proceso de residencias profesionales y desarrollé el backend con PHP 8.3 y CodeIgniter 4.',
+    'Integré Microsoft Entra ID para la autenticación con OAuth 2.0, implementé control de acceso por roles (RBAC) y desarrollé middleware para consumir Microsoft Graph API.',
+    'Desarrollé una interfaz adaptable con Bootstrap 5 e incorporé interacciones dinámicas con jQuery y AJAX.'
+  ],
+  technologies: [
+    'PHP 8.3',
+    'CodeIgniter 4',
+    'MySQL',
+    'OAuth2',
+    'Microsoft Entra ID',
+    'Microsoft Graph API',
+    'Bootstrap 5',
+    'jQuery',
+    'AJAX'
+  ]
+} as const satisfies Experience;
+
 export const portfolio = {
   person: {
     name: 'José Alejandro Estudillo Herrera',
-    headline: 'Ingeniero en Sistemas Computacionales · Desarrollador PHP & Java',
-    shortHeadline: 'Desarrollador Full Stack orientado a soluciones web',
-    location: 'Ciudad de México, México',
+    headline: 'Ingeniero en Sistemas Computacionales | Desarrollador de software',
+    location: 'Cuauhtémoc, CDMX',
+    about: {
+      intro: 'Desarrollo soluciones web con enfoque en procesos institucionales, seguridad, integración de servicios y mantenibilidad.',
+      detail: 'He desarrollado reportes de avance con gráficas y exportación, flujos de inventario con bajas y evidencias, y aplicaciones institucionales con control de acceso e integración de servicios Microsoft.',
+      points: [
+        { title: 'Enfoque', detail: 'Desarrollo web y transformación digital' },
+        { title: 'Arquitectura', detail: 'MVC, APIs RESTful e integración de identidad' },
+        { title: 'Entrega', detail: 'Del análisis de requisitos a producción' }
+      ]
+    },
     summary:
-      'Ingeniero en Sistemas Computacionales con experiencia en desarrollo web, digitalización de procesos, arquitectura MVC, seguridad de aplicaciones e integración de APIs empresariales. Ha participado desde el análisis de requisitos hasta la implementación en entornos de producción.',
+      'Ingeniero en Sistemas Computacionales con experiencia en desarrollo web con PHP, Laravel y CodeIgniter. He desarrollado módulos de reportes e inventarios y participado en la digitalización de procesos institucionales, desde el análisis de requisitos hasta el despliegue en producción.',
     keywords: [
       'Desarrollo Full Stack',
       'PHP',
-      'Java',
+      'Laravel 12',
       'CodeIgniter 4',
       'Bootstrap 5',
       'MySQL',
@@ -52,67 +109,22 @@ export const portfolio = {
     emailEncoded: 'YWxlamFuZHJvLmVzdHVkaWxsby5oQG91dGxvb2suY29t'
   },
   experience: [
-    {
-      role: 'Desarrollador Full Stack & Líder Técnico',
-      organization: 'Instituto Tecnológico Superior de Huatusco (ITSH)',
-      project: 'Sistema de Control de Residencias Profesionales',
-      period: 'Agosto 2024 – Febrero 2026',
-      summary:
-        'Proyecto institucional enfocado en migrar el proceso de residencia profesional desde formatos físicos hacia un flujo digital validado.',
-      highlights: [
-        'Liderazgo en la definición del ciclo de vida del software y modelado de casos de uso para la digitalización del proceso.',
-        'Diseño e implementación del backend con CodeIgniter 4 y PHP 8.3, con bases de datos MySQL y optimización de consultas SQL.',
-        'Integración de Microsoft Entra ID mediante OAuth2 y autorización basada en roles para proteger información institucional.',
-        'Desarrollo de middleware para el consumo seguro de Microsoft Graph API y gestión de datos estandarizados.',
-        'Construcción de una interfaz responsiva con Bootstrap 5, jQuery y AJAX para mejorar la interacción sin recargas completas.'
-      ],
-      technologies: [
-        'PHP 8.3',
-        'CodeIgniter 4',
-        'MySQL',
-        'OAuth2',
-        'Microsoft Entra ID',
-        'Microsoft Graph API',
-        'Bootstrap 5',
-        'jQuery',
-        'AJAX'
-      ]
-    }
+    lefic,
+    itsh
   ] satisfies readonly Experience[],
   education: [
     {
       degree: 'Ingeniería en Sistemas Computacionales',
-      institution: 'Instituto Tecnológico Superior de Huatusco',
-      graduation: 'Junio 2026',
-      note: 'Titulado'//'En espera de entrega de título, según el CV proporcionado.'
+      institution: itsh.organization,
+      graduation: 'Egreso en junio de 2026',
+      note: 'Título pendiente de entrega.'
     }
   ],
-  skills: [
-    {
-      title: 'Backend',
-      items: ['PHP 8.3', 'CodeIgniter 4', 'APIs RESTful', 'Microsoft Graph API', 'OAuth2', 'MySQL', 'SQL Server']
-    },
-    {
-      title: 'Frontend',
-      items: ['HTML5', 'CSS3', 'JavaScript ES6+', 'jQuery', 'Bootstrap 5']
-    },
-    {
-      title: 'DevOps e infraestructura',
-      items: ['Git', 'GitHub', 'Control de versiones', 'Despliegue LAMP', 'Entornos de producción']
-    },
-    {
-      title: 'Procesos y calidad',
-      items: ['SDLC', 'SCRUM', 'KANBAN', 'Incremental', 'Diseño orientado a objetos', 'Pruebas de usuario', 'PHPUnit']
-    },
-    {
-      title: 'Colaboración',
-      items: ['Gestión de requisitos', 'Entrevistas', 'Reporte de avance', 'Trabajo interdepartamental', 'Adaptabilidad con usuarios finales']
-    }
-  ] satisfies readonly SkillGroup[],
+  skills: technicalSkills,
   projects: [
     {
-      title: 'Sistema de Control de Residencias Profesionales',
-      organization: 'Instituto Tecnológico Superior de Huatusco',
+      title: itsh.project,
+      organization: itsh.organization,
       description:
         'Digitalización del proceso institucional de residencias profesionales mediante una aplicación web con arquitectura MVC, control de acceso, integración de identidad y consumo de servicios empresariales.',
       contributions: [
@@ -131,12 +143,5 @@ export const portfolio = {
       level: 'Intermedio (B1)',
       detail: 'Capacidad para leer documentación técnica.'
     }
-  ],
-  pending: [
-    '[PENDIENTE: agregar logros cuantificables verificables.]',
-    '[PENDIENTE: agregar enlaces públicos o repositorios de proyectos, si existen.]',
-    '[PENDIENTE: agregar certificaciones o cursos cuando exista información verificable.]',
-    '[PENDIENTE: confirmar si una versión pública del CV puede ofrecerse para descarga.]',
-    '[PENDIENTE: agregar fotografía profesional o identidad visual propia, si se desea.]'
   ]
 } as const;

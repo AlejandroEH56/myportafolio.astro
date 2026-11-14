@@ -275,8 +275,6 @@ h3 { font-size: 1.3rem; }
   color: var(--accent-strong);
   font-weight: 850;
 }
-.privacy-note { margin-top: 1rem; color: var(--text-muted); font-size: 0.88rem; }
-.privacy-note code { color: var(--text); }
 
 .error-page { min-height: 68vh; display: grid; align-items: center; }
 .error-page h1 { max-width: none; font-size: clamp(2.3rem, 8vw, 4.5rem); }

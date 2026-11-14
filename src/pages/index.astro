@@ -9,33 +9,27 @@ import ContactLinks from '../components/ContactLinks.astro';
 import { portfolio } from '../data/portfolio';
 
 const title = `${portfolio.person.name} | Portafolio profesional`;
-const description = 'Portafolio profesional de José Alejandro Estudillo Herrera: desarrollo Full Stack, PHP, CodeIgniter, seguridad OAuth2, APIs empresariales y soluciones web institucionales.';
+const description = portfolio.person.summary;
 ---
 
 <BaseLayout {title} {description}>
-  <Hero />
+  <Hero person={portfolio.person} />
 
   <Section
     id="sobre-mi"
     eyebrow="Perfil"
     title="Sobre mí"
-    intro="Desarrollo soluciones web con enfoque en procesos institucionales, seguridad, integración de servicios y mantenibilidad."
+    intro={portfolio.person.about.intro}
   >
     <div class="about-grid">
-      <p>{portfolio.person.summary}</p>
+      <p>{portfolio.person.about.detail}</p>
       <div class="about-points">
-        <div>
-          <strong>Enfoque</strong>
-          <span>Desarrollo web y transformación digital</span>
-        </div>
-        <div>
-          <strong>Arquitectura</strong>
-          <span>MVC, APIs RESTful e integración de identidad</span>
-        </div>
-        <div>
-          <strong>Entrega</strong>
-          <span>Del análisis de requisitos a producción</span>
-        </div>
+        {portfolio.person.about.points.map(({ title, detail }) => (
+          <div>
+            <strong>{title}</strong>
+            <span>{detail}</span>
+          </div>
+        ))}
       </div>
     </div>
   </Section>
@@ -63,7 +57,6 @@ const description = 'Portafolio profesional de José Alejandro Estudillo Herrera
     id="habilidades"
     eyebrow="Stack"
     title="Habilidades y tecnologías"
-    intro="Tecnologías y prácticas mencionadas explícitamente en el CV proporcionado."
   >
     <Skills groups={portfolio.skills} />
     <div class="language-card card">
@@ -78,7 +71,6 @@ const description = 'Portafolio profesional de José Alejandro Estudillo Herrera
     id="proyectos"
     eyebrow="Trabajo destacado"
     title="Proyectos"
-    intro="El CV documenta un proyecto institucional. No se agregaron proyectos adicionales sin evidencia."
   >
     <div class="projects-grid">
       {portfolio.projects.map((project) => <ProjectCard {project} />)}
@@ -91,6 +83,6 @@ const description = 'Portafolio profesional de José Alejandro Estudillo Herrera
     title="Conversemos"
     intro="Puedes consultar mi actividad profesional o iniciar contacto mediante los siguientes canales."
   >
-    <ContactLinks />
+    <ContactLinks links={portfolio.links} />
   </Section>
 </BaseLayout>
